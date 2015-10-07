@@ -5,17 +5,17 @@ import java.util.Date;
  * Created by mikhail on 05.10.15.
  */
 public class User {
-    private Integer UuserID;
+    private Integer userID;
     private String password;
     private String login;
     private Date createdData;
 
-    public Integer getUuserID() {
-        return UuserID;
+    public Integer getUserID() {
+        return userID;
     }
 
-    public void setUuserID(Integer uuserID) {
-        UuserID = uuserID;
+    public void setUserID(Integer userID) {
+        this.userID = userID;
     }
 
     public String getPassword() {
