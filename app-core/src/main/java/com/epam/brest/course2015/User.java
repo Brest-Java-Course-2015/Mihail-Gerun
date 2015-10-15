@@ -5,25 +5,34 @@ import java.util.Date;
  * Created by mikhail on 05.10.15.
  */
 public class User {
-    private Integer userID;
-    private String password;
+
+    private Integer userId;
+
     private String login;
-    private Date createdData;
 
-    public Integer getUserID() {
-        return userID;
+    private String password;
+
+    private Date createdDate;
+
+    private Date updatedDate;
+
+    public User() {
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
+    public User(Integer userId, String login, String password, Date createdDate, Date updatedDate) {
+        this.userId = userId;
+        this.login = login;
         this.password = password;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getLogin() {
@@ -34,11 +43,46 @@ public class User {
         this.login = login;
     }
 
-    public Date getCreatedData() {
-        return createdData;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCreatedData(Date createdData) {
-        this.createdData = createdData;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public static enum UserFields {
+
+        USER_ID ("userId"),
+        LOGIN ("login"),
+        PASSWORD ("password"),
+        CREATED_DATE ("createdDate"),
+        UPDATED_DATE ("updatedDate");
+
+        private UserFields(String value){
+            this.value = value;
+        }
+
+        private final String value;
+
+        public String getValue(){return value;}
+
+    }
+
 }

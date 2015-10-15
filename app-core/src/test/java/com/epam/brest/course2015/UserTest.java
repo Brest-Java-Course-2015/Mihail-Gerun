@@ -12,9 +12,10 @@ import static org.junit.Assert.*;
 public class UserTest {
     private User user;
     private final Date testDate=new Date(2015,10,7);
-    private final Integer testUserID=1;
+    private final Integer testUserId=1;
     @Before
     public void setUp(){
+
         user=new User();
     }
 
@@ -31,14 +32,15 @@ public class UserTest {
         assertEquals("Password", user.getPassword());
     }
 
+
     @org.junit.Test
     public void testGetCreatedData() throws Exception {
-        user.setCreatedData(testDate);
-        assertEquals(testDate,user.getCreatedData());
+        user.setCreatedDate(testDate);
+        assertEquals(testDate,user.getCreatedDate());
     }
     @org.junit.Test
     public void testGetUserId() throws Exception {
-        user.setUserID(testUserID);
-        assertEquals(testUserID, user.getUserID());
+        user.setUserId(testUserId);
+        assertEquals(testUserId, user.getUserId());
     }
 }
