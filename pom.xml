@@ -3,7 +3,7 @@
 
     <groupId>com.epam.brest.course2015</groupId>
     <artifactId>Mihail-Gerun</artifactId>
-    <name>Mihail Gerun</name>
+    <name>Mihail-Gerun</name>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 

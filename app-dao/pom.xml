@@ -3,7 +3,7 @@
 
 
     <artifactId>app-dao</artifactId>
-    <name>${artifactId}</name>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
     <parent>

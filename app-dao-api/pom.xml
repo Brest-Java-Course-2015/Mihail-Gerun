@@ -11,7 +11,7 @@
 
 
     <artifactId>app-dao-api</artifactId>
-    <name>${artifactId}</name>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
 

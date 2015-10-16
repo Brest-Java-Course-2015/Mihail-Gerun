@@ -54,7 +54,6 @@ public class UserServiceImpl implements UserService {
     public User getUserByLogin(String login) {
         LOGGER.debug("getUserBylogin({}):",login);
         Assert.notNull(login, "Login should not be null");
-        Assert.isTrue((getAllUsers().size()>0), "Current users count = 0");
         return userDao.getUserByLogin(login);
     }
 

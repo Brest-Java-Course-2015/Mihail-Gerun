@@ -19,7 +19,8 @@ public class User {
     public User() {
     }
 
-    public User(Integer userId, String login, String password, Date createdDate, Date updatedDate) {
+    public User(Integer userId, String login, String password,
+                Date createdDate, Date updatedDate) {
         this.userId = userId;
         this.login = login;
         this.password = password;
@@ -74,15 +75,11 @@ public class User {
         PASSWORD ("password"),
         CREATED_DATE ("createdDate"),
         UPDATED_DATE ("updatedDate");
-
         private UserFields(String value){
             this.value = value;
         }
-
         private final String value;
-
         public String getValue(){return value;}
-
     }
 
 }
