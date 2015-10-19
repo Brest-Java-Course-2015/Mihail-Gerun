@@ -1,5 +1,7 @@
 package com.epam.brest.course2015.dao;
 import com.epam.brest.course2015.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,10 @@ import static org.junit.Assert.assertTrue;
  * Created by mikhail on 7.10.15.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:test-spring-dao.xml"})
+@ContextConfiguration(locations = {"classpath*:test-spring-dao"})
 @Transactional()
 public class UserDaoImplTest {
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public static final String USER_LOGIN1 = "userLogin1";
     public static final String USER_PASSWORD1 = "userPassword1";
@@ -28,7 +31,9 @@ public class UserDaoImplTest {
     @Autowired
     private UserDao userDao;
 
-    private static final User user = new User(null, "userLogin3", "userPassword3", null, new Date());
+    private static final User user = new User("login", "userPassword3");
+
+
 
     @Test
     public void testGetAllUsers() throws Exception {
@@ -53,6 +58,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testAddUser() throws Exception {
+        LOGGER.debug("test: addUser()");
         Integer userId = userDao.addUser(user);
         assertNotNull(userId);
         User newUser = userDao.getUserById(userId);

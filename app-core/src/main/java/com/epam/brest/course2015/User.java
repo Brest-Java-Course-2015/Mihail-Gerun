@@ -1,5 +1,7 @@
 package com.epam.brest.course2015;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Created by mikhail on 05.10.15.
@@ -7,14 +9,29 @@ import java.util.Date;
 public class User {
 
     private Integer userId;
-
+    private static int i=3;
     private String login;
-
+    //@JsonIgnore
     private String password;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private Date createdDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+    private Date updatedDate=new Date();
 
-    private Date updatedDate;
+
+
+    public User(String login,String password)
+    {
+        this.password=password;
+        this.login=login;
+    }
+
+    public User(Integer userId,String password)
+    {
+        this.userId=userId;
+        this.password=password;
+    }
+
 
     public User() {
     }

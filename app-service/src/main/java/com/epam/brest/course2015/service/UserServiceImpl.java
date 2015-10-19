@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.util.List;
 
@@ -40,7 +41,12 @@ public class UserServiceImpl implements UserService {
         Assert.notNull(user.getPassword(), "Password should not be null");
         Assert.hasText(user.getPassword(), "Password should be text");
         Assert.notNull(user.getUpdatedDate(), "UpdatedDate should not be null");
-        return userDao.addUser(user);
+        try {
+                        userDao.getUserByLogin(user.getLogin());
+                    } catch (EmptyResultDataAccessException ex) {
+                        return userDao.addUser(user);
+                    }
+                throw new IllegalArgumentException("User login should be unique.");
     }
 
     @Override
