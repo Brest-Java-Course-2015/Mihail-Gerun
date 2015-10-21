@@ -28,6 +28,7 @@ public class UserServiceImplTest {
 
     @Test
     public void testGetAllUsers() throws Exception {
+        LOGGER.debug("Test: getAllUsers()");
         Assert.assertTrue(userService.getAllUsers().size() > 0);
         userService.getAllUsers();
     }
@@ -39,7 +40,6 @@ public class UserServiceImplTest {
         user.setLogin("Vasia");
         user.setUserId(null);
         user.setPassword("Password");
-        user.setUpdatedDate(new Date(2015,10,15,18,8,0));
         userService.addUser(user);
     }
 

@@ -22,35 +22,35 @@ public class UserRestController {
        return userService.getAllUsers();
     }
 
-    @RequestMapping(value = "/user/add/{login}/{password}", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/{login}/{password}", method = RequestMethod.POST)
     public @ResponseBody Integer addUser(@PathVariable(value = "login") String login,
                                          @PathVariable(value = "password") String password) {
         return userService.addUser(new User(login, password));
     }
 
-    @RequestMapping(value = "/user/update/{id}/{password}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/user/{id}/{password}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
     public void updateUser(@PathVariable(value = "id") Integer id,
                                          @PathVariable(value = "password") String password) {
         userService.updateUser(new User(id, password));
     }
 
-    @RequestMapping(value = "/user/getId/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public User getUserById(@PathVariable(value = "id") Integer id){
        return userService.getUserById(id);
 
     }
 
-    @RequestMapping(value = "/user/del/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteUser(@PathVariable(value = "id") Integer id) {
         userService.deleteUser(id);
     }
 
-    @RequestMapping(value = "/user/getLogin/{login}", method = RequestMethod.GET)
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public User getUserByLogin(@PathVariable(value = "login") String login){
+    public User getUserByLogin(@RequestParam(value = "login") String login){
        return userService.getUserByLogin(login);
     }
 

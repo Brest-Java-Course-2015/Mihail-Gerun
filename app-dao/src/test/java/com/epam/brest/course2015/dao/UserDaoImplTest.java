@@ -9,10 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -20,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  * Created by mikhail on 7.10.15.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:test-spring-dao"})
+@ContextConfiguration(locations = {"classpath*:test-spring-dao.xml"})
 @Transactional()
 public class UserDaoImplTest {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -37,12 +35,14 @@ public class UserDaoImplTest {
 
     @Test
     public void testGetAllUsers() throws Exception {
+        LOGGER.debug("Test: getAllUsers()");
         List<User> users = userDao.getAllUsers();
         assertTrue(users.size() == 2);
     }
 
     @Test
     public void testGetUser() throws Exception {
+        LOGGER.debug("Test: getAllUsers()");
         int userId = 1;
         User user = userDao.getUserById(userId);
         assertNotNull(user);

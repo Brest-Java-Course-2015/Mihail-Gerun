@@ -37,9 +37,11 @@ public class UserServiceImpl implements UserService {
         Assert.notNull(user, "User should not be null.");
         Assert.isNull(user.getUserId(), "Id should be null");
         Assert.notNull(user.getLogin(), "Login should not be null");
-        Assert.hasText(user.getLogin(), "This login is exist");
+        Assert.hasText(user.getLogin(), "Login should be text");
+        Assert.isTrue(user.getLogin().length()>3, "Login length should be more than 3");
         Assert.notNull(user.getPassword(), "Password should not be null");
         Assert.hasText(user.getPassword(), "Password should be text");
+        Assert.isTrue(user.getPassword().length()>3, "Password length should be more than 3");
         Assert.notNull(user.getUpdatedDate(), "UpdatedDate should not be null");
         try {
                         userDao.getUserByLogin(user.getLogin());
@@ -60,6 +62,8 @@ public class UserServiceImpl implements UserService {
     public User getUserByLogin(String login) {
         LOGGER.debug("getUserBylogin({}):",login);
         Assert.notNull(login, "Login should not be null");
+        Assert.hasText(login, "Login should be text");
+        Assert.isTrue(login.length()>3, "Login lenght should be > 3");
         return userDao.getUserByLogin(login);
     }
 
@@ -70,6 +74,7 @@ public class UserServiceImpl implements UserService {
         Assert.notNull(user.getUserId(), "Id should not be null");
         Assert.notNull(user.getPassword(), "Password should not be null");
         Assert.hasText(user.getPassword(), "Password should be text");
+        Assert.isTrue(user.getPassword().length()>3, "Password length should be more than 3");
         Assert.notNull(user.getUpdatedDate(), "UpdatedDate should not be null");
         userDao.updateUser(user);
     }
