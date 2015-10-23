@@ -40,6 +40,9 @@ public class UserDaoImpl implements UserDao {
     @Value("${user.insertUser}")
     private String insertUser;
 
+    @Value("${user.countUsers}")
+    private String countUser;
+
     @Value("${user.updateUser}")
     private String updateUser;
 
@@ -52,6 +55,13 @@ public class UserDaoImpl implements UserDao {
     public UserDaoImpl(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+    }
+
+
+    @Override
+    public Integer getCountUsers(String login) {
+        LOGGER.debug("getCountUsers(): login = {}", login);
+        return jdbcTemplate.queryForObject(countUser, new String[]{login}, Integer.class);
     }
 
     @Override

@@ -26,6 +26,13 @@ public class UserServiceImplTest {
     @Autowired
     private UserService userService;
 
+
+    @Test
+    public void testGetCountUsers() throws Exception {
+        LOGGER.debug("Test: getCountUsers()");
+        userService.getCountUsers("userLogin1");
+    }
+
     @Test
     public void testGetAllUsers() throws Exception {
         LOGGER.debug("Test: getAllUsers()");

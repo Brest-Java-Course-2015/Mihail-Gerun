@@ -25,6 +25,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void logUser(User user) {
+        LOGGER.debug("logUser(): user id = {} ", user.getUserId());
+    }
+
+    @Override
+    public Integer getCountUsers(String login) {
+        LOGGER.debug("getCountUsers()");
+        Assert.notNull(login, "Login should not be null");
+        Assert.hasText(login, "Login should be text");
+        Assert.isTrue(login.length()>3, "Login length should be more than 3");
+        return userDao.getCountUsers(login);
+
+    }
+
+    @Override
     public List<User> getAllUsers() {
         LOGGER.debug("getAllUsers()");
         return userDao.getAllUsers();
@@ -43,12 +58,10 @@ public class UserServiceImpl implements UserService {
         Assert.hasText(user.getPassword(), "Password should be text");
         Assert.isTrue(user.getPassword().length()>3, "Password length should be more than 3");
         Assert.notNull(user.getUpdatedDate(), "UpdatedDate should not be null");
-        try {
-                        userDao.getUserByLogin(user.getLogin());
-                    } catch (EmptyResultDataAccessException ex) {
-                        return userDao.addUser(user);
-                    }
-                throw new IllegalArgumentException("User login should be unique.");
+        if (userDao.getCountUsers(user.getLogin()) > 0) {
+            throw new IllegalArgumentException("User login should be unique.");
+        }
+        return userDao.addUser(user);
     }
 
     @Override

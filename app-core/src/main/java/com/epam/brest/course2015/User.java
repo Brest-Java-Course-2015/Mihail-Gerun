@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class User {
 
     private Integer userId;
-    private static int i=3;
+
     private String login;
     //@JsonIgnore
     private String password;
@@ -24,6 +24,12 @@ public class User {
     {
         this.password=password;
         this.login=login;
+    }
+
+    public User(Integer userId, String login, String password) {
+        this.userId = userId;
+        this.login = login;
+        this.password = password;
     }
 
     public User(Integer userId,String password)
@@ -99,4 +105,8 @@ public class User {
         public String getValue(){return value;}
     }
 
+    public boolean equals(Object obj)
+    {
+        return login.equals(((User) obj).getLogin());
+    }
 }

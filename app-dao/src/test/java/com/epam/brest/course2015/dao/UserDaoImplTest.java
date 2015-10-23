@@ -55,6 +55,25 @@ public class UserDaoImplTest {
         assertNotNull(user);
         assertTrue(user.getLogin().equals(USER_LOGIN1));
     }
+	
+	@Test
+    public void testCountUsers() throws Exception {
+        LOGGER.debug("test: countUsers()");
+        String login = userDao.getAllUsers().get(0).getLogin();
+        assertNotNull(login);
+        Integer usersCount = userDao.getCountUsers(login);
+        assertNotNull(usersCount);
+        assertTrue(usersCount.equals(1));
+    }
+
+    @Test
+    public void testZeroCountUsers() throws Exception {
+        LOGGER.debug("test: zeroCountUsers()");
+        String login = "qweqweqwe";
+        Integer usersCount = userDao.getCountUsers(login);
+        assertNotNull(usersCount);
+        assertTrue(usersCount.equals(0));
+    }
 
     @Test
     public void testAddUser() throws Exception {

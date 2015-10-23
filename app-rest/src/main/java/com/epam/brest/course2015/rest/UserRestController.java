@@ -48,9 +48,9 @@ public class UserRestController {
         userService.deleteUser(id);
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/login/{login}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public User getUserByLogin(@RequestParam(value = "login") String login){
+    public User getUserByLogin(@PathVariable(value = "login") String login){
        return userService.getUserByLogin(login);
     }
 
