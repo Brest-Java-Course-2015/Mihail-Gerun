@@ -1,6 +1,7 @@
 package com.epam.brest.course2015.service;
 
 import com.epam.brest.course2015.User;
+import com.epam.brest.course2015.dto.UserDto;
 
 
 import java.util.List;
@@ -25,5 +26,7 @@ public interface UserService {
     public void logUser(User user);
 
     public Integer getCountUsers(String countUser);
+
+    public UserDto getUserDto();
 
 }

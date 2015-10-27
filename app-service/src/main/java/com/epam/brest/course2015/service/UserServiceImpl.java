@@ -2,6 +2,7 @@ package com.epam.brest.course2015.service;
 
 import com.epam.brest.course2015.User;
 import com.epam.brest.course2015.dao.UserDao;
+import com.epam.brest.course2015.dto.UserDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +38,11 @@ public class UserServiceImpl implements UserService {
         Assert.isTrue(login.length()>3, "Login length should be more than 3");
         return userDao.getCountUsers(login);
 
+    }
+
+    @Override
+    public UserDto getUserDto() {
+        return null;
     }
 
     @Override
