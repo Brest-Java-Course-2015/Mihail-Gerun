@@ -67,6 +67,7 @@ public class Main {
         }
     }
 
+
     private void checkValue(int item) {
         switch (item) {
             case 1:
