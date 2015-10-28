@@ -24,4 +24,6 @@ public interface UserDao {
     public void deleteUser(Integer userId);
 
     public Integer getCountUsers(String countUser);
+
+    public Integer getTotalUsersCount();
 }

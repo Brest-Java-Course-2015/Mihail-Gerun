@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.epam.brest.course2015.dto.UserDto;
 import java.util.Date;
 
 /**
@@ -26,6 +26,14 @@ public class UserServiceImplTest {
     @Autowired
     private UserService userService;
 
+    @Test
+    public void testGetUserDto() throws Exception {
+        LOGGER.debug("test: getUserDto()");
+        UserDto userDto = userService.getUserDto();
+        Assert.assertNotNull(userDto);
+        Assert.assertTrue(userDto.getTotal() > 0);
+        Assert.assertTrue(userDto.getUsers().size() > 0);
+    }
 
     @Test
     public void testGetCountUsers() throws Exception {

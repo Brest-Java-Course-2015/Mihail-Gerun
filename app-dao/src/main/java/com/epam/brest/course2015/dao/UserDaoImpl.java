@@ -49,12 +49,20 @@ public class UserDaoImpl implements UserDao {
     @Value("${user.deleteUser}")
     private String deleteUser;
 
+    @Value("${user.totalUsersCount}")
+    private String totalUsersCountSql;
+
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public UserDaoImpl(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
         namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+    }
+
+    public Integer getTotalUsersCount() {
+        LOGGER.debug("getTotalUsersCount()");
+        return jdbcTemplate.queryForObject(totalUsersCountSql, Integer.class);
     }
 
 

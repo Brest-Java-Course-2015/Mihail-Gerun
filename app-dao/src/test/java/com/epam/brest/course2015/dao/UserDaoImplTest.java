@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by mikhail on 7.10.15.
@@ -106,5 +107,13 @@ public class UserDaoImplTest {
         int sizeBefore = users.size();
         userDao.deleteUser(users.get(0).getUserId());
         assertTrue((sizeBefore - 1) == userDao.getAllUsers().size());
+    }
+
+    @Test
+    public void testTotalUsersCount() throws Exception {
+        LOGGER.debug("test: totalUsersCount()");
+        Integer length = userDao.getAllUsers().size();
+        Integer usersCount = userDao.getTotalUsersCount();
+        assertEquals(length,usersCount);
     }
 }
