@@ -15,7 +15,11 @@
         </property>
     </bean>
 
-    <bean id="userDao" class="com.epam.brest.course2015.dao.UserDaoImpl">
+    <bean id="kardDao" class="com.epam.brest.myproject.dao.KardDaoImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="userDao" class="com.epam.brest.myproject.dao.UserDaoImpl">
         <constructor-arg ref="dataSource"/>
     </bean>
 

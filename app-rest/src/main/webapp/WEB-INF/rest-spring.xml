@@ -13,7 +13,7 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.epam.brest.course2015.rest"/>
+    <context:component-scan base-package="com.epam.brest.myproject.rest"/>
 
     <mvc:annotation-driven/>
 
@@ -34,21 +34,32 @@
     </bean>
 
     <jdbc:initialize-database data-source="dataSource">
-        <jdbc:script location="classpath*:create-tables.sql"/>
-        <jdbc:script location="classpath*:data-script.sql"/>
+        <jdbc:script location="classpath*:create-tables-kard.sql"/>
+        <jdbc:script location="classpath*:data-script-kard.sql"/>
+        <jdbc:script location="classpath*:create-tables-user.sql"/>
+        <jdbc:script location="classpath*:data-script-user.sql"/>
     </jdbc:initialize-database>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="userDao" class="com.epam.brest.course2015.dao.UserDaoImpl">
+    <bean id="userDao" class="com.epam.brest.myproject.dao.UserDaoImpl">
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean id="userService" class="com.epam.brest.course2015.service.UserServiceImpl">
+    <bean id="kardDao" class="com.epam.brest.myproject.dao.KardDaoImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="userService" class="com.epam.brest.myproject.service.UserServiceImpl">
         <property name="userDao" ref="userDao"/>
     </bean>
+
+    <bean id="kardService" class="com.epam.brest.myproject.service.KardServiceImpl">
+        <property name="kardDao" ref="kardDao"/>
+    </bean>
+
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">

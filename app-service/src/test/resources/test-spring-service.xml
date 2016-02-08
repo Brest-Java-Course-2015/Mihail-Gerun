@@ -15,12 +15,21 @@
         </property>
     </bean>
 
-    <bean id="userDao" class="com.epam.brest.course2015.dao.UserDaoImpl">
+    <bean id="userDao" class="com.epam.brest.myproject.dao.UserDaoImpl">
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean id="userService" class="com.epam.brest.course2015.service.UserServiceImpl">
+    <bean id="userService" class="com.epam.brest.myproject.service.UserServiceImpl">
         <property name="userDao" ref="userDao"/>
     </bean>
+
+    <bean id="kardDao" class="com.epam.brest.myproject.dao.KardDaoImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="kardService" class="com.epam.brest.myproject.service.KardServiceImpl">
+        <property name="kardDao" ref="kardDao"/>
+    </bean>
+
 
 </beans>

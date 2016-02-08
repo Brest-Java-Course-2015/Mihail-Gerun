@@ -1,17 +1,26 @@
 // The root URL for the RESTful services
-var USER_URL = "http://localhost:8080/rest/user";
-var USERS_DTO_URL = "http://localhost:8080/rest/userdto";
-
+$("head").append($('<script type="text/javascript" src="js/properties.js"></script>'));
+var USER_URL = PREFIX_URL+"/user";
+var USERS_DTO_URL = PREFIX_URL+"/userdto";
+var KARDS_URL = PREFIX_URL+"/kards";
 findAll();
 
 // Register listeners
 $('#btnSave').click(function () {
-    if ($('#userId').val() == '')
         addUser();
-    else
-        updateUser();
     return false;
 });
+
+function goToUserKards(userId)
+{
+    window.location="userkards.html?userId="+userId;
+}
+
+
+function goToKards()
+{
+    window.location="kards.html";
+}
 
 function findAll() {
     console.log('findAll');
@@ -27,11 +36,16 @@ function findAll() {
     });
 }
 
+
+
 function drawRow(user) {
     var row = $("<tr />")
     $("#userList").append(row);
-    row.append($("<td>" + '<a href="#" data-identity="' + user.userId + '">' + user.login + '</a></td>'));
+    row.append($("<td>" + user.login + "</a></td>"));
+    row.append($("<td>" + user.countKard +"</td>"));
+    row.append($("<td>" + user.balance +"</td>"));
     row.append($("<td>" + user.createdDate + "</td>"));
+    row.append($("<td>" + '<button onclick="deleteUser('+ user.userId +')">Удалить</button>' + '<button onclick="goToUserKards('+user.userId+')">Перейти</button>' + "</td>"));
 }
 
 function renderList(data) {
@@ -42,6 +56,32 @@ function renderList(data) {
     });
 }
 
+
+function deleteUser(userId) {
+
+    if (confirm("Вы уверены, что хотите удалить пользователя, удалятся так же все его карточки?"))
+    {
+        console.log('deleteUser' + userId);
+        $.ajax({
+            type: 'DELETE',
+            url: KARDS_URL + "/"+ userId,
+            success: function (data, textStatus, jqXHR) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: USER_URL + "/"+ userId,
+                });
+                alert('Пользователь успешно удалён!');
+                findAll();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Ошибка удаления пользователя!: ' + textStatus + userId);
+            }
+        })
+
+    }
+}
+
+
 function addUser() {
     console.log('addUser');
     $.ajax({
@@ -51,38 +91,17 @@ function addUser() {
         dataType: "json",
         data: formToJSON(),
         success: function (data, textStatus, jqXHR) {
-            alert('User created successfully');
-            $('#userId').val(data.userId);
+            alert('Пользователь успешно создан');
             findAll();
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert('addUser error: ' + textStatus);
-        }
-    });
-}
-
-function updateUser() {
-    console.log('updateUser');
-    $.ajax({
-        type: 'PUT',
-        contentType: 'application/json',
-        url: USER_URL,
-        data: formToJSON(),
-        success: function (data, textStatus, jqXHR) {
-            alert('User updated successfully');
-            findAll();
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert('updateUser error: ' + textStatus);
+            alert('Ошибка создания пользователя!: ' + textStatus);
         }
     });
 }
 
 function formToJSON() {
-    var userId = $('#userId').val();
     return JSON.stringify({
-        "userId": userId == "" ? null : userId,
-        "login": $('#login').val(),
-        "password": $('#password').val()
+        "login": $('#login').val()
     });
 }

@@ -15,8 +15,10 @@
     </bean>
 
     <jdbc:initialize-database data-source="dataSource">
-        <jdbc:script location="create-tables.sql"/>
-        <jdbc:script location="data-script.sql"/>
+        <jdbc:script location="create-tables-user.sql"/>
+        <jdbc:script location="data-script-user.sql"/>
+        <jdbc:script location="create-tables-kard.sql"/>
+        <jdbc:script location="data-script-kard.sql"/>
     </jdbc:initialize-database>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

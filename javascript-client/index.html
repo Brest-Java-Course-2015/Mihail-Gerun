@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Sample javascript client</title>
+    <title>All users</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,33 +19,33 @@
         <thead>
         <tr>
             <th>Логин</th>
+            <th>Количество карточек</th>
+            <th>Баланс</th>
             <th>Дата создания</th>
+            <th>Действия</th>
         </tr>
         </thead>
         <tbody id="userList">
         <tr>
             <td>abc</td>
+            <td>balance</td>
+            <td>countKard</td>
             <td>def</td>
+            <td>wad</td>
         </tr>
         </tbody>
     </table>
 </div>
-
+<button id="btnGoToKards" onclick="goToKards()">Список карт</button>
 <hr />
 
 <form id="userForm">
     <div class="mainArea">
 
-        <label>Id:</label>
-        <input id="userId" name="id" type="text" disabled/>
-
-        <label>Login:</label>
+        <label>Логин:</label>
         <input type="text" id="login" name="login" required>
 
-        <label>Password:</label>
-        <input type="password" id="password" name="password" required>
-
-        <button id="btnSave">Сохранить</button>
+        <button id="btnSave">Создать</button>
 
     </div>
 </form>
@@ -57,5 +57,4 @@
 
 <script src="js/main.js"></script>
 
-</body>
 </html>
