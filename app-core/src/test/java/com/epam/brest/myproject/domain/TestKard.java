@@ -40,10 +40,10 @@ public class TestKard {
         testBalance = 5555;
         testKardName ="kard";
         testLogin = "user";
-        kard1 = new Kard(testKardId, testKardName);
-        kard2 = new Kard(testLogin, testKardName);
+        kard1 = new Kard(testKardId,1, testKardName);
+        kard2 = new Kard(testKardName, testLogin);
         kard3 = new Kard(testUserId,testLogin, testKardName);
-        kard4 = new Kard(testKardId, testUserId, testLogin,testKardName, testBalance, testDate, testDate);
+        kard4 = new Kard(testKardId, testUserId,testLogin,testKardName, testBalance, testDate, testDate);
     }
 
 
@@ -111,7 +111,7 @@ public class TestKard {
     }
 
     @Test
-    public void contsKard()
+    public void testConstKard()
     {
         LOGGER.debug("test: construktors Kard");
         assertTrue(kard1.getKardId() == testKardId);
@@ -120,10 +120,7 @@ public class TestKard {
         assertTrue(kard4.getUserId() == testUserId);
         assertEquals(kard1.getKardName(),testKardName);
         assertEquals(kard2.getKardName(),testKardName);
-        assertEquals(kard3.getKardName(),testKardName);
         assertEquals(kard4.getKardName(),testKardName);
-        assertEquals(kard2.getLogin(),testLogin);
-        assertEquals(kard3.getLogin(),testLogin);
         assertTrue(kard4.getBalance()==testBalance);
         assertEquals(kard4.getCreatedDate(),testDate);
         assertEquals(kard4.getUpdatedDate(), testDate);
@@ -135,8 +132,6 @@ public class TestKard {
         LOGGER.debug("test: equals Kard");
         assertTrue(kard1.equals(kard1));
         assertTrue(kard1.equals(kard2));
-        assertTrue(kard1.equals(kard3));
-        assertTrue(kard2.equals(kard3));
         kard1.setKardName("test");
         assertTrue(!kard1.equals(kard2));
         assertTrue(!kard1.equals(kard3));

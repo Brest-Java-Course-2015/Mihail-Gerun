@@ -42,9 +42,9 @@ function drawRow(user) {
     var row = $("<tr />")
     $("#userList").append(row);
     row.append($("<td>" + user.login + "</a></td>"));
-    row.append($("<td>" + user.countKard +"</td>"));
-    row.append($("<td>" + user.balance +"</td>"));
-    row.append($("<td>" + user.createdDate + "</td>"));
+    row.append($("<td>" + user.allBalance +"</td>"));
+    row.append($("<td>" + user.countKardOnUser +"</td>"));
+    row.append($("<td>" + user.createdUserDate + "</td>"));
     row.append($("<td>" + '<button onclick="deleteUser('+ user.userId +')">Удалить</button>' + '<button onclick="goToUserKards('+user.userId+')">Перейти</button>' + "</td>"));
 }
 
@@ -64,20 +64,19 @@ function deleteUser(userId) {
         console.log('deleteUser' + userId);
         $.ajax({
             type: 'DELETE',
-            url: KARDS_URL + "/"+ userId,
+            url: KARDS_URL + "/delete/"+ userId,
             success: function (data, textStatus, jqXHR) {
                 $.ajax({
                     type: 'DELETE',
-                    url: USER_URL + "/"+ userId,
+                    url: USER_URL + "/delete/"+ userId,
                 });
                 alert('Пользователь успешно удалён!');
-                findAll();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Ошибка удаления пользователя!: ' + textStatus + userId);
             }
-        })
-
+        });
+        findAll();
     }
 }
 

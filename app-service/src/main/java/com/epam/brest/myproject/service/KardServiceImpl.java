@@ -2,6 +2,7 @@ package com.epam.brest.myproject.service;
 
 import com.epam.brest.myproject.dao.KardDao;
 import com.epam.brest.myproject.domain.Kard;
+import com.epam.brest.myproject.domain.User;
 import com.epam.brest.myproject.dto.KardDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -46,11 +47,16 @@ public class KardServiceImpl implements KardService {
         LOGGER.debug("addKard(): kard name = {} ", kard.getKardName());
         Assert.isNull(kard.getKardId(), "kard Id should be null.");
         Assert.notNull(kard.getKardName(), "Kard name should not be null.");
-        Assert.notNull(kard.getLogin(), "Kard user login should not be null.");
-        if (kardDao.getCountUsersKard(kard.getLogin(),kard.getKardName()) > 0) {
+        if(kard.getUserId()!=null) {
+            Assert.notNull(kard.getUserId(), "Kard userid should not be null.");
+        }
+        else
+        {
+            Assert.notNull(kard.getLogin(), "Kard login should not be null");
+        }
+        if (kardDao.getCountUsersKard(kard.getUserId(),kard.getKardName()) > 0) {
             throw new IllegalArgumentException("Kard name should be unique.");
         }
-        kard.setUserId(returnUserIdByLogin(kard.getLogin()));
         return kardDao.addKard(kard);
     }
 
@@ -104,12 +110,6 @@ public class KardServiceImpl implements KardService {
         return kardDao.getKardByName(kardName);
     }
 
-    @Override
-    public Integer returnUserIdByLogin(String login) {
-        LOGGER.debug("returnUserIdByLogin");
-        Assert.notNull(login);
-        return kardDao.returnUserIdByLogin(login);
-    }
 
     @Override
     public KardDto getKardDto(LocalDate startDate, LocalDate endDate) {

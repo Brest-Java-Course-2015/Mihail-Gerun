@@ -97,23 +97,7 @@ public class UserControllerMockTest {
 
         userService.deleteUser(anyInt());
         replay(userService);
-        mockMvc.perform(delete("/user/1").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
-    }
-
-    @Test
-    public void getCountKard() throws Exception {
-
-        expect(userService.getCountKard(EasyMock.anyObject(String.class))).andReturn(2);
-        replay(userService);
-        mockMvc.perform(get("/user/kard/userLogin1").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
-    }
-
-    @Test
-    public void getBalance() throws Exception {
-
-        expect(userService.getBalance(EasyMock.anyObject(String.class))).andReturn(3000);
-        replay(userService);
-        mockMvc.perform(get("/user/balance/userLogin1").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+        mockMvc.perform(delete("/user/delete/1").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
     }
 
     @Test

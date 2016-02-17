@@ -14,6 +14,7 @@ import java.util.List;
 /**
  * Created by bendar on 18.11.15.
  */
+@CrossOrigin
 @RestController
 public class UserRestController {
 
@@ -42,7 +43,7 @@ public class UserRestController {
 
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/user/delete/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteUser(@PathVariable(value = "id") Integer id) {
         userService.deleteUser(id);
@@ -54,20 +55,6 @@ public class UserRestController {
     public @ResponseBody User getUser(@PathVariable(value = "login") String login) {
         LOGGER.debug("getUser: login = {}", login);
         return userService.getUserByLogin(login);
-    }
-
-    @RequestMapping(value = "/user/kard/{login}", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    public @ResponseBody Integer getCountKard(@PathVariable(value = "login") String login) {
-        LOGGER.debug("getUser: login = {}", login);
-        return userService.getCountKard(login);
-    }
-
-    @RequestMapping(value = "/user/balance/{login}", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    public @ResponseBody Integer getBalance(@PathVariable(value = "login") String login) {
-        LOGGER.debug("getUser: login = {}", login);
-        return userService.getBalance(login);
     }
 
     @RequestMapping(value = "/userdto", method = RequestMethod.GET)

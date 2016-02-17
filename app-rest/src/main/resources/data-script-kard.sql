@@ -1,3 +1,3 @@
-INSERT INTO KARD (kardid,userid, login, kardName, balance, updatedDate) VALUES (1,1, 'userLogin1', 'kard1', 1000, TO_TIMESTAMP('28/10/2015 21:35:00', 'DD/MM/YYYY HH:MI:SS'));
-INSERT INTO KARD (kardid,userid, login, kardName, balance, updatedDate) VALUES (2,1, 'userLogin1', 'kard2', 2000, TO_TIMESTAMP('26/10/2015 21:35:00', 'DD/MM/YYYY HH:MI:SS'));
-INSERT INTO KARD (kardid,userid, login, kardName, balance, updatedDate) VALUES (3,2, 'userLogin2', 'kard3', 3000, TO_TIMESTAMP('24/10/2015 21:35:00', 'DD/MM/YYYY HH:MI:SS'));
+INSERT INTO KARD (kardid,userid,login, kardName, balance, updatedDate) VALUES (1,1,'userLogin1', 'kard1', 1000, TO_TIMESTAMP('28/10/2015 21:35:00', 'DD/MM/YYYY HH:MI:SS'));
+INSERT INTO KARD (kardid,userid,login, kardName, balance, updatedDate) VALUES (2,1,'userLogin1','kard2', 2000, TO_TIMESTAMP('26/10/2015 21:35:00', 'DD/MM/YYYY HH:MI:SS'));
+INSERT INTO KARD (kardid,userid,login, kardName, balance, updatedDate) VALUES (3,2,'userLogin2', 'kard3', 3000, TO_TIMESTAMP('24/10/2015 21:35:00', 'DD/MM/YYYY HH:MI:SS'));

@@ -2,8 +2,8 @@
 $("head").append($('<script type="text/javascript" src="js/properties.js"></script>'));
 var KARD_URL = PREFIX_URL+"/kard";
 var KARDS_DTO_URL = PREFIX_URL+"/karddto";
+var USER_URL = PREFIX_URL + "/user"
 var userId =getQueryVariable("userId");
-var login;
 findAll();
 
 function getQueryVariable(variable)
@@ -46,7 +46,6 @@ function findAll() {
 }
 
 function drawRow(kard) {
-    login=kard.login;
     var row = $("<tr />")
     $("#kardList").append(row);
     row.append($("<td>" + kard.login + "</a></td>"));
@@ -73,7 +72,7 @@ function deleteKard(kardId) {
         console.log('deleteKard' + kardId);
         $.ajax({
             type: 'DELETE',
-            url: KARD_URL + "/"+ kardId,
+            url: KARD_URL + "/delete/"+ kardId,
             success: function (data, textStatus, jqXHR) {
                 alert('Карта успешно удалена.');
                 findAll();
@@ -129,7 +128,7 @@ function addKard() {
 
 function formToJSON() {
     return JSON.stringify({
-        "login": login,
+        "userId": userId,
         "kardName": $('#kardName').val()
     });
 }

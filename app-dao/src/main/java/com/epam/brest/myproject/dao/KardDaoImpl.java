@@ -38,8 +38,11 @@ public class KardDaoImpl implements KardDao {
     @Value("${kard.selectByUser}")
     private String kardSelectByUser;
 
-    @Value("${kard.insertKard}")
-    private String insertKard;
+    @Value("${kard.insertKardWithId}")
+    private String insertKardWithId;
+
+    @Value("${kard.insertKardWithLogin}")
+    private String insertKardWithLogin;
 
     @Value("${kard.deleteKard}")
     private String deleteKard;
@@ -55,9 +58,6 @@ public class KardDaoImpl implements KardDao {
 
     @Value("${kard.countUsersKard}")
     private String countUsersKard;
-
-    @Value("${user.returnIdByLogin}")
-    private String returnIdByLogin;
 
     @Value("${kard.dateFilter}")
     private String dateFilterSql;
@@ -90,7 +90,13 @@ public class KardDaoImpl implements KardDao {
     {
         LOGGER.debug("addKardOnUser(): kardName={}");
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(insertKard, getParametersMap(kard), keyHolder);
+        if(kard.getUserId()==null) {
+            namedParameterJdbcTemplate.update(insertKardWithLogin, getParametersMap(kard), keyHolder);
+        }
+        else
+        {
+            namedParameterJdbcTemplate.update(insertKardWithId, getParametersMap(kard), keyHolder);
+        }
         return keyHolder.getKey().intValue();
     }
 
@@ -135,18 +141,12 @@ public class KardDaoImpl implements KardDao {
     }
 
     @Override
-    public Integer getCountUsersKard(String userLogin, String kardName) {
+    public Integer getCountUsersKard(Integer userId, String kardName) {
         LOGGER.debug("getCountUsersKard");
-        return jdbcTemplate.queryForObject(countUsersKard, new Object[]{userLogin,kardName}, Integer.class);
+        return jdbcTemplate.queryForObject(countUsersKard, new Object[]{userId,kardName}, Integer.class);
 
     }
 
-    @Override
-    public Integer returnUserIdByLogin(String login) {
-        LOGGER.debug("retunrUserIDByLogin");
-        return jdbcTemplate.queryForObject(returnIdByLogin, new Object[]{login}, Integer.class);
-
-    }
 
     @Override
     public List<Kard> dateFilter(LocalDate startDateFilter, LocalDate endDateFilter) {

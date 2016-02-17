@@ -1,2 +1,2 @@
-INSERT INTO USER (userid, login, balance, countKard) VALUES (1, 'userLogin1', 5000, 5);
-INSERT INTO USER (userid, login, balance, countKard) VALUES (2, 'userLogin2', 1000, 2);
+INSERT INTO USER (userid, login, countKardOnUser, allBalance) VALUES (1, 'userLogin1', 1, 1000);
+INSERT INTO USER (userid, login, countKardOnUser, allBalance) VALUES (2, 'userLogin2', 5, 5000);

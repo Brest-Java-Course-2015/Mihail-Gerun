@@ -20,9 +20,9 @@ public interface UserService {
 
     public void deleteUser(Integer userId);
 
-    public Integer getCountKard(String login);
-
-    public Integer getBalance(String login);
+//    public Integer getCountKard(String login);
+//
+//    public Integer getBalance(String login);
 
     UserDto getUserDto();
 }

@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.List;
 
+
 /**
  * Created by bendar on 18.11.15.
  */
+@CrossOrigin
 @RestController
 public class KardRestController {
     DateTimeFormatter DATE_FORMAT = DateTimeFormat.forPattern("dd/MM/yyyy");
@@ -63,7 +65,7 @@ public class KardRestController {
         return kardService.getKardById(id);
     }
 
-    @RequestMapping(value = "/kard/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/kard/delete/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteKard(@PathVariable(value = "id") Integer id)
     {
@@ -71,7 +73,7 @@ public class KardRestController {
         kardService.deleteKard(id);
     }
 
-    @RequestMapping(value = "/kards/{userId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/kards/delete/{userId}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteKardOnUser(@PathVariable(value = "userId") Integer userId)
     {

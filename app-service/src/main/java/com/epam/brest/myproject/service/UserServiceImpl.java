@@ -70,33 +70,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer getCountKard(String login) {
-        LOGGER.debug("getCountKard(): login = {} ", login);
-        Assert.notNull(login, "User login should not be null.");
-        Assert.hasText(login, "User login should be text.");
-        return userDao.getCountKard(login);
-    }
-
-    @Override
-    public Integer getBalance(String login) {
-        LOGGER.debug("getBalance(): login = {} ", login);
-        Assert.notNull(login, "User login should not be null.");
-        Assert.hasText(login, "User login should be text.");
-        return userDao.getBalance(login);
-    }
-
-    @Override
     public UserDto getUserDto() {
         UserDto userDto = new UserDto();
         List<User> users = userDao.getAllUsers();
         userDto.setTotal(users.size());
         if (userDto.getTotal() > 0) {
-            for(int i=0;i<users.size();i++)
-            {
-                String login = users.get(i).getLogin();
-                userDao.setCountKardAndBalance(login,getBalance(login),getCountKard(login));
-            }
-            userDto.setUsers(userDao.getAllUsers());
+             userDto.setUsers(userDao.getAllUsers());
         } else {
             userDto.setUsers(Collections.<User>emptyList());
         }

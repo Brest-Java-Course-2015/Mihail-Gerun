@@ -31,7 +31,7 @@ public class KardDaoImplTest {
     private static final Integer ID_KARD=1;
     private static final Integer ID_USER=1;
     private static final Integer OPERATION_KARD=10000;
-    private static final Kard kard = new Kard(1,"kard6","userLogin1");
+    private static final Kard kard = new Kard(1,1,"kard6");
 
     @Autowired
     KardDao kardDao;
@@ -50,8 +50,22 @@ public class KardDaoImplTest {
     }
 
     @Test
-    public void testAddKard() throws Exception {
+    public void testAddKardWithId() throws Exception {
         LOGGER.debug("Test: addKard()");
+        Integer kardId = kardDao.addKard(kard);
+        assertNotNull(kardId);
+        Kard newKard = kardDao.getKardById(kardId);
+        assertNotNull(newKard);
+        assertTrue(kard.getKardName().equals(newKard.getKardName()));
+        assertTrue(kard.getLogin().equals(newKard.getLogin()));
+        assertNotNull(newKard.getCreatedDate().toString());
+    }
+
+    @Test
+    public void testAddKardWithLogin() throws Exception {
+        LOGGER.debug("Test: addKard()");
+        kard.setUserId(null);
+        kard.setLogin("userLogin1");
         Integer kardId = kardDao.addKard(kard);
         assertNotNull(kardId);
         Kard newKard = kardDao.getKardById(kardId);
@@ -113,11 +127,11 @@ public class KardDaoImplTest {
     @Test
     public void testCountUsersKard()throws Exception {
         LOGGER.debug("test: countUsersKard()");
-        String login = kardDao.getAllKard().get(0).getLogin();
+        Integer userId = kardDao.getAllKard().get(0).getUserId();
         String kardName = kardDao.getAllKard().get(0).getKardName();
-        assertNotNull(login);
+        assertNotNull(userId);
         assertNotNull(kardName);
-        Integer kardCount = kardDao.getCountUsersKard(login, kardName);
+        Integer kardCount = kardDao.getCountUsersKard(userId, kardName);
         assertNotNull(kardCount);
         assertTrue(kardCount.equals(1));
     }
@@ -125,21 +139,11 @@ public class KardDaoImplTest {
     @Test
     public void testZeroCountUsers() throws Exception {
         LOGGER.debug("test: zeroCountUsersKard()");
-        String login = "qweqweqwe";
+        Integer userId = 15;
         String kardName = "wadawad";
-        Integer kardCount = kardDao.getCountUsersKard(login, kardName);
+        Integer kardCount = kardDao.getCountUsersKard(userId, kardName);
         assertNotNull(kardCount);
         assertTrue(kardCount.equals(0));
-    }
-
-    @Test
-    public void testReturnUserIdByLogin() throws Exception
-    {
-        LOGGER.debug("test: returnUserIdByLogin()");
-        String login = "userLogin1";
-        Integer testId=kardDao.returnUserIdByLogin(login);
-        assertNotNull(testId);
-        assertTrue(testId==1);
     }
 
     @Test

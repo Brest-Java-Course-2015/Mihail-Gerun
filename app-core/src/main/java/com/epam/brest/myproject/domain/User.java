@@ -12,10 +12,10 @@ public class User {
     SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
     private Integer userId;
     private String login;
-    private Integer countKard;
-    private Integer balance;
+    private Integer allBalance;
+    private Integer countKardOnUser;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-    private Date createdDate;
+    private Date createdUserDate;
 
 
     public User()
@@ -33,12 +33,12 @@ public class User {
         this.userId=id;
     }
 
-    public User(Integer userId, String login,Integer balance,Integer countKard, Date createdDate) {
+    public User(Integer userId, String login,Integer countKardOnUser, Integer allBalance, Date createdUserDate) {
         this.userId=userId;
         this.login=login;
-        this.countKard=countKard;
-        this.balance=balance;
-        this.createdDate=createdDate;
+        this.allBalance = allBalance;
+        this.countKardOnUser = countKardOnUser;
+        this.createdUserDate = createdUserDate;
     }
 
 
@@ -50,12 +50,12 @@ public class User {
         this.login = login;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public Date getCreatedUserDate() {
+        return createdUserDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setCreatedUserDate(Date createdUserDate) {
+        this.createdUserDate = createdUserDate;
     }
 
     public Integer getUserId() {
@@ -66,20 +66,20 @@ public class User {
         this.userId = userId;
     }
 
-    public Integer getCountKard() {
-        return countKard;
+    public Integer getAllBalance() {
+        return allBalance;
     }
 
-    public void setCountKard(Integer countKard) {
-        this.countKard = countKard;
+    public void setAllBalance(Integer allBalance) {
+        this.allBalance = allBalance;
     }
 
-    public Integer getBalance() {
-        return balance;
+    public Integer getCountKardOnUser() {
+        return countKardOnUser;
     }
 
-    public void setBalance(Integer balance) {
-        this.balance = balance;
+    public void setCountKardOnUser(Integer countKardOnUser) {
+        this.countKardOnUser = countKardOnUser;
     }
 
     public boolean equals(Object obj) {
@@ -91,9 +91,9 @@ public class User {
         return String.format("User: {" +
                 "userId=" + userId +
                 ", login='" + login  +
-                ", countKard='" + countKard  +
-                ", balance='" + balance  +
-                ", createdDate=" + DATE_FORMAT.format(createdDate) +
+                ", countKardOnUser=" +countKardOnUser +
+                ", allBalance=" +allBalance +
+                ", createdDate=" + DATE_FORMAT.format(createdUserDate) +
                 '}');
     }
 }

@@ -29,8 +29,6 @@ public interface KardService {
 
     public List<Kard> getKardByName(String kardName);
 
-    Integer returnUserIdByLogin(String login);
-
     KardDto getKardDto(LocalDate startDate, LocalDate endDate);
 
     KardDto getKardDto(Integer userId);

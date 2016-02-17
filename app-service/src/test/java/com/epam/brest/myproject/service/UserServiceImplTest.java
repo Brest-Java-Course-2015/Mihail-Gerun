@@ -133,34 +133,6 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void testGetBalance() throws Exception
-    {
-        LOGGER.debug("test: getBalance()");
-        userService.getBalance("userLogin1");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetBalanceWithNullLogin() throws Exception
-    {
-        LOGGER.debug("test: getBalanceWithNullLogin()");
-        userService.getBalance(null);
-    }
-
-    @Test
-    public void testGetCountKard() throws Exception
-    {
-        LOGGER.debug("test: getKountKard()");
-        userService.getCountKard("userLogin1");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetCountKardWithNullLogin() throws Exception
-    {
-        LOGGER.debug("test: getCountKardWithNullLogin()");
-        userService.getBalance(null);
-    }
-
-    @Test
     public void testGetUserDto() throws Exception
     {
         LOGGER.debug("test: getUserDto()");

@@ -30,7 +30,7 @@ public class KardServiceImplTest {
     @Autowired
     private KardService kardService;
 
-    private Kard kard = new Kard(1 ,"userLogin2", "kard8");
+    private Kard kard = new Kard(null,1,"userLogin1", "kard8");
 
     @Test
     public void testGetAllKard() throws Exception {
@@ -81,9 +81,11 @@ public class KardServiceImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAddKardWithNullLogin() throws Exception {
-        LOGGER.debug("test: getAllKardOnUserWithNullLogin()");
+    public void testAddKardWithNullUserIdAndLogin() throws Exception {
+        LOGGER.debug("test: getAllKardOnUserWithNullUserIdAndNullLogin()");
+        Integer userId = null;
         String login = null;
+        kard.setUserId(userId);
         kard.setLogin(login);
         kardService.addKard(kard);
     }
@@ -105,7 +107,7 @@ public class KardServiceImplTest {
     @Test(expected = IllegalArgumentException.class)
     public void testAddKardWithNotUniqueName() throws Exception {
         LOGGER.debug("test: addKardWithNotUniqueName()");
-        Kard kard = new Kard("userLogin2", "kard8");
+        Kard kard = new Kard(2,2, "kard8");
         kardService.addKard(kard);
         kardService.addKard(kard);
     }

@@ -65,7 +65,7 @@ public class KardControllerMockTest {
         expect(kardService.addKard(anyObject(Kard.class))).andReturn(4);
         replay(kardService);
 
-        String kard =new ObjectMapper().writeValueAsString(new Kard(1,"userLogin2","kard5"));
+        String kard =new ObjectMapper().writeValueAsString(new Kard(null,2,"kard5"));
 
         mockMvc.perform(post("/kard").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(kard)).andDo(print()).andExpect(status().isCreated()).andExpect(content().string("4"));
     }
@@ -76,7 +76,7 @@ public class KardControllerMockTest {
 
         kardService.deleteAllKardOnUser(EasyMock.anyObject(Integer.class));
         replay(kardService);
-        mockMvc.perform(delete("/kards/1").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+        mockMvc.perform(delete("/kards/delete/1").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
     }
 
     @Test
@@ -100,7 +100,7 @@ public class KardControllerMockTest {
 
         kardService.deleteKard(EasyMock.anyObject(Integer.class));
         replay(kardService);
-        mockMvc.perform(delete("/kard/1").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+        mockMvc.perform(delete("/kard/delete/1").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
     }
 
     @Test
@@ -131,7 +131,6 @@ public class KardControllerMockTest {
     public void kardOperationTest() throws Exception {
 
         expect(kardService.changeBalance(EasyMock.anyObject(Integer.class),EasyMock.anyObject(Integer.class))).andReturn(0);
-        //expectLastCall();
         replay(kardService);
         mockMvc.perform(post("/kard/operation/1/-1000").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
     }

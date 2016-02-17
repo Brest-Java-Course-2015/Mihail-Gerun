@@ -19,10 +19,10 @@ public interface UserDao {
     public void deleteUser(Integer userId);
 
     public Integer getCountUsers(String login);
-
-    public Integer getCountKard(String login);
-
-    public Integer getBalance(String login);
-
-    void setCountKardAndBalance(String login, Integer balance, Integer countKard);
+//
+//    public Integer getCountKard(String login);
+//
+//    public Integer getBalance(String login);
+//
+//    void setCountKardAndBalance(String login, Integer balance, Integer countKard);
 }

@@ -20,8 +20,6 @@ public class TestUser {
     private String testLogin;
     private Integer testUserId;
     private Date testDate;
-    private Integer testCountKard;
-    private Integer testBalance;
     private User user1;
     private User user2;
     private User user3;
@@ -33,11 +31,9 @@ public class TestUser {
         user = new User();
         testUserId = 5;
         testDate = new Date();
-        testBalance=5000;
-        testCountKard=3;
         user1 = new User(testLogin);
         user2 = new User(testUserId);
-        user3 = new User(testUserId, testLogin, testBalance, testCountKard, testDate);
+        user3 = new User(testUserId, testLogin,1,1, testDate);
     }
 
     @Test
@@ -59,27 +55,27 @@ public class TestUser {
 
 
     @Test
-    public void testGetCreatedDate()
+    public void testGetCreatedUserDate()
     {
-        LOGGER.debug("test: getCreatedDate()");
-        user.setCreatedDate(testDate);
-        assertEquals(testDate, user.getCreatedDate());
+        LOGGER.debug("test: getCreatedUserDate()");
+        user.setCreatedUserDate(testDate);
+        assertEquals(testDate, user.getCreatedUserDate());
     }
 
     @Test
-    public void testGetCountKard()
+    public void testGetAllBalance()
     {
-        LOGGER.debug("test: getCountKard()");
-        user.setCountKard(testCountKard);
-        assertEquals(testCountKard,user.getCountKard());
+        LOGGER.debug("test: getAllBalance()");
+        user.setAllBalance(1000);
+        assertTrue(1000 == user.getAllBalance());
     }
 
     @Test
-    public void testGetBalance()
+    public void testCountKardOnUser()
     {
-        LOGGER.debug("test: getBalance()");
-        user.setBalance(testBalance);
-        assertEquals(testBalance,user.getBalance());
+        LOGGER.debug("test: getCountKardOnUser()");
+        user.setCountKardOnUser(1);
+        assertTrue(1 == user.getCountKardOnUser());
     }
 
     @Test
@@ -90,9 +86,7 @@ public class TestUser {
         assertEquals(user3.getLogin(), testLogin);
         assertTrue(user2.getUserId()==testUserId);
         assertTrue(user3.getUserId()==testUserId);
-        assertTrue(user3.getBalance()==testBalance);
-        assertTrue(user3.getCountKard()==testCountKard);
-        assertEquals(user3.getCreatedDate(),testDate);
+        assertEquals(user3.getCreatedUserDate(),testDate);
     }
 
     @Test

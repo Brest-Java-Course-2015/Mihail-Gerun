@@ -25,19 +25,28 @@ public class Kard {
 
     public Kard(){}
 
-    public Kard(Integer id, String kardName)
+    public Kard(Integer id, Integer userId, String kardName)
     {
+        this.userId=userId;
         this.kardId=id;
         this.kardName=kardName;
     }
 
-    public Kard(String login, String kardName)
+    public Kard(Integer id, Integer userId,String login ,String kardName)
+    {
+        this.userId=userId;
+        this.kardId=id;
+        this.login=login;
+        this.kardName=kardName;
+    }
+
+    public Kard(String kardName, String login)
     {
         this.kardName=kardName;
         this.login=login;
     }
 
-    public Kard(Integer userId,String login, String kardName)
+    public Kard(Integer userId, String kardName, String login)
     {
         this.userId=userId;
         this.kardName=kardName;

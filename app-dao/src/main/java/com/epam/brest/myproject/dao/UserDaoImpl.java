@@ -4,6 +4,7 @@ import com.epam.brest.myproject.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -36,26 +37,24 @@ public class UserDaoImpl implements UserDao {
     @Value("${user.insertUser}")
     private String insertUser;
 
-    @Value("${user.updateUser}")
-    private String updateUser;
-
     @Value("${user.deleteUser}")
     private String deleteUser;
 
     @Value("${user.countUsers}")
     private String countUser;
 
-    @Value("${user.getBalance}")
-    private String balanceUser;
-
-    @Value("${user.getCountKard}")
-    private String countKardUser;
-
-    @Value("${user.setCountKardAndBalance}")
-    private String setCountKardAndBalanceUser;
+//    @Value("${user.getBalance}")
+//    private String balanceUser;
+//
+//    @Value("${user.getCountKard}")
+//    private String countKardUser;
+//
+//    @Value("${user.setCountKardAndBalance}")
+//    private String setCountKardAndBalanceUser;
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private RowMapper<User> userMapper = new BeanPropertyRowMapper<>(User.class);
 
     public UserDaoImpl(DataSource dataSourceUser) {
         jdbcTemplate = new JdbcTemplate(dataSourceUser);
@@ -65,7 +64,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         LOGGER.debug("getAllUsers()");
-        return jdbcTemplate.query(userSelect,new UserRowMapper());
+        return jdbcTemplate.query(userSelect,userMapper);
     }
 
     @Override
@@ -100,35 +99,15 @@ public class UserDaoImpl implements UserDao {
         return jdbcTemplate.queryForObject(countUser, new String[]{login}, Integer.class);
     }
 
-    @Override
-    public Integer getCountKard(String login)
-    {
-        LOGGER.debug("getCountKard(): login = {}", login);
-        return jdbcTemplate.queryForObject(countKardUser, new String[]{login}, Integer.class);
-    }
-
-    @Override
-    public Integer getBalance(String login)
-    {
-        LOGGER.debug("getCountKard(): login = {}", login);
-        return jdbcTemplate.queryForObject(balanceUser, new String[]{login}, Integer.class);
-    }
-
-    @Override
-    public void setCountKardAndBalance(String login, Integer balance, Integer countKard)
-    {
-        LOGGER.debug("setCountKardAndBalance(): login = {}", login);
-        jdbcTemplate.update(setCountKardAndBalanceUser, balance,countKard,login);
-    }
 
 
     private MapSqlParameterSource getParametersMap(User user) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("userId", user.getUserId());
         parameterSource.addValue("login", user.getLogin());
-        parameterSource.addValue("countKard", user.getCountKard());
-        parameterSource.addValue("balance", user.getBalance());
-        parameterSource.addValue("createdDate", user.getCreatedDate());
+        parameterSource.addValue("countKardOnUser", user.getCountKardOnUser());
+        parameterSource.addValue("allBalance", user.getAllBalance());
+        parameterSource.addValue("createdDate", user.getCreatedUserDate());
         return parameterSource;
     }
 
@@ -138,9 +117,9 @@ public class UserDaoImpl implements UserDao {
         public User mapRow(ResultSet resultSet, int i) throws SQLException {
             return new User(resultSet.getInt("userId"),
                     resultSet.getString("login"),
-                    resultSet.getInt("balance"),
-                    resultSet.getInt("countKard"),
-                    resultSet.getTimestamp("createdDate"));
+                    resultSet.getInt("countKardOnUser"),
+                    resultSet.getInt("allBalance"),
+                    resultSet.getTimestamp("createdUserDate"));
         }
     }
 }

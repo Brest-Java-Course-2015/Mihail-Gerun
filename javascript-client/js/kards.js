@@ -13,6 +13,10 @@ $('#btnSave').click(function () {
     return false;
 });
 
+$('#btnReset').click(function(){
+    findAll();
+});
+
 $('#btnFilter').click(function () {
     filterDate($('#startDate').val(), $('#endDate').val());
     return false;
@@ -83,7 +87,7 @@ function transformDate(date)
 function drawRow(kard) {
     var row = $("<tr />")
     $("#kardList").append(row);
-    row.append($("<td>" + kard.login + "</a></td>"));
+    row.append($("<td>" + kard.login + "</td>"));
     row.append($("<td>" + kard.kardName +"</td>"));
     row.append($("<td>" + kard.balance +"</td>"));
     row.append($("<td>" + kard.createdDate +"</td>"));
@@ -107,7 +111,7 @@ function deleteKard(kardId) {
         console.log('deleteKard' + kardId);
         $.ajax({
             type: 'DELETE',
-            url: KARD_URL + "/"+ kardId,
+            url: KARD_URL + "/delete/"+ kardId,
             success: function (data, textStatus, jqXHR) {
                 alert('Карта удалена успешно.');
                 findAll();

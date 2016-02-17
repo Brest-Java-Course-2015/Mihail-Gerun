@@ -60,7 +60,7 @@ public class UserDaoImplTest {
         User newUser = userDao.getUserById(userId);
         assertNotNull(newUser);
         assertTrue(user.getLogin().equals(newUser.getLogin()));
-        assertNotNull(newUser.getCreatedDate());
+        assertNotNull(newUser.getCreatedUserDate());
     }
 
     @Test
@@ -91,34 +91,5 @@ public class UserDaoImplTest {
         Integer usersCount = userDao.getCountUsers(login);
         assertNotNull(usersCount);
         assertTrue(usersCount.equals(0));
-    }
-
-    @Test
-    public void testGetCountKard() throws Exception {
-        LOGGER.debug("test: getCountKard()");
-        Integer countKard = userDao.getCountKard(USER_LOGIN1);
-        assertNotNull(countKard);
-        assertTrue(countKard==2);
-    }
-
-    @Test
-    public void testGetBalance() throws Exception {
-        LOGGER.debug("test: getBalance()");
-        Integer balance = userDao.getBalance(USER_LOGIN1);
-        assertNotNull(balance);
-        assertTrue(balance==3000);
-    }
-
-    @Test
-    public void testSetCountKardAndBalance() throws Exception
-    {
-        LOGGER.debug("test: setCountKardAndBalance()");
-        User testUserAfter = userDao.getUserByLogin(USER_LOGIN1);
-        userDao.setCountKardAndBalance(USER_LOGIN1, 10, 10);
-        User testUserBefore = userDao.getUserByLogin(USER_LOGIN1);
-        assertTrue(testUserAfter.getBalance()!=testUserBefore.getBalance());
-        assertTrue(testUserAfter.getCountKard()!=testUserBefore.getBalance());
-        assertTrue(testUserBefore.getBalance()==10);
-        assertTrue(testUserBefore.getCountKard()==10);
     }
 }
