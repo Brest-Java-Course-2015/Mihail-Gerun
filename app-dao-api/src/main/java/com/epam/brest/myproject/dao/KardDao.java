@@ -30,5 +30,7 @@ public interface KardDao {
 
     public Integer getCountUsersKard(Integer userId,String kardName);
 
+    public Integer getCountUsersKard(String login,String kardName);
+
     public List<Kard> dateFilter(LocalDate startDateFilter, LocalDate endDateFilter);
 }

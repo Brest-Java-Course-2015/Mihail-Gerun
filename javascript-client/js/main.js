@@ -71,6 +71,7 @@ function deleteUser(userId) {
                     url: USER_URL + "/delete/"+ userId,
                 });
                 alert('Пользователь успешно удалён!');
+                findAll();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Ошибка удаления пользователя!: ' + textStatus + userId);

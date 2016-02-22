@@ -125,13 +125,25 @@ public class KardDaoImplTest {
     }
 
     @Test
-    public void testCountUsersKard()throws Exception {
-        LOGGER.debug("test: countUsersKard()");
+    public void testCountUsersKardWithId()throws Exception {
+        LOGGER.debug("test: countUsersKardWithId()");
         Integer userId = kardDao.getAllKard().get(0).getUserId();
         String kardName = kardDao.getAllKard().get(0).getKardName();
         assertNotNull(userId);
         assertNotNull(kardName);
         Integer kardCount = kardDao.getCountUsersKard(userId, kardName);
+        assertNotNull(kardCount);
+        assertTrue(kardCount.equals(1));
+    }
+
+    @Test
+    public void testCountUsersKardWithLogin()throws Exception {
+        LOGGER.debug("test: countUsersKardWithLogin()");
+        String login = kardDao.getAllKard().get(0).getLogin();
+        String kardName = kardDao.getAllKard().get(0).getKardName();
+        assertNotNull(login);
+        assertNotNull(kardName);
+        Integer kardCount = kardDao.getCountUsersKard(login, kardName);
         assertNotNull(kardCount);
         assertTrue(kardCount.equals(1));
     }

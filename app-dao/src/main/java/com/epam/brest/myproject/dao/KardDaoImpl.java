@@ -56,8 +56,12 @@ public class KardDaoImpl implements KardDao {
     @Value("${kard.countKard}")
     private String countKard;
 
-    @Value("${kard.countUsersKard}")
-    private String countUsersKard;
+    @Value("${kard.countUsersKardWithId}")
+    private String countUsersKardWithId;
+
+    @Value("${kard.countUsersKardWithLogin}")
+    private String countUsersKardWithLogin;
+
 
     @Value("${kard.dateFilter}")
     private String dateFilterSql;
@@ -143,8 +147,13 @@ public class KardDaoImpl implements KardDao {
     @Override
     public Integer getCountUsersKard(Integer userId, String kardName) {
         LOGGER.debug("getCountUsersKard");
-        return jdbcTemplate.queryForObject(countUsersKard, new Object[]{userId,kardName}, Integer.class);
+        return jdbcTemplate.queryForObject(countUsersKardWithId, new Object[]{userId,kardName}, Integer.class);
+    }
 
+    @Override
+    public Integer getCountUsersKard(String login, String kardName) {
+        LOGGER.debug("getCountUsersKard");
+        return jdbcTemplate.queryForObject(countUsersKardWithLogin, new Object[]{login,kardName}, Integer.class);
     }
 
 

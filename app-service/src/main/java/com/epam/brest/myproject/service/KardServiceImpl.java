@@ -54,7 +54,7 @@ public class KardServiceImpl implements KardService {
         {
             Assert.notNull(kard.getLogin(), "Kard login should not be null");
         }
-        if (kardDao.getCountUsersKard(kard.getUserId(),kard.getKardName()) > 0) {
+        if ((kardDao.getCountUsersKard(kard.getUserId(),kard.getKardName()) > 0) || (kardDao.getCountUsersKard(kard.getLogin(),kard.getKardName())> 0)) {
             throw new IllegalArgumentException("Kard name should be unique.");
         }
         return kardDao.addKard(kard);
